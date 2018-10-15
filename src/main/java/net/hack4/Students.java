@@ -24,6 +24,8 @@ public class Students {
     this.level = level;
   }
 
+
+
   public void LimitData(int limit) {
 
     this.limit = limit;
@@ -32,13 +34,13 @@ public class Students {
     String dbUser = "root";
     String dbPass = "ekmek";
     try {
-      Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/beersDB", dbUser, dbPass);
+      Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Students", dbUser, dbPass);
       // 2. create a statement
       Statement myStatement = connection.createStatement();
 
       // 3. execute sql query
 
-      myStatement.executeQuery("select * from Beers LIMIT " + limit + ";");
+      myStatement.executeQuery("select * from personal_info LIMIT " + limit + ";");
 
       ResultSet Datas = myStatement.getResultSet();
 
@@ -47,7 +49,7 @@ public class Students {
 
       while (Datas.next()) {
         // System.out.println(Datas.getString("Username" + " " + "Password" + " " + "Email" + " " + "Level"));
-        System.out.println(Datas.getString("Name"));
+        System.out.println(Datas.getString("Username"));
       }
 
 
@@ -108,13 +110,13 @@ public class Students {
     String dbUser = "root";
     String dbPass = "ekmek";
     try {
-      Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/beersDB", dbUser, dbPass);
+      Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Students", dbUser, dbPass);
       // 2. create a statement
       Statement myStatement = connection.createStatement();
 
       // 3. execute sql query
 
-      myStatement.executeQuery("select * from Beers;");
+      myStatement.executeQuery("select * from personal_info;");
 
       ResultSet Datas = myStatement.getResultSet();
 
@@ -123,15 +125,13 @@ public class Students {
 
       while (Datas.next()) {
         //System.out.println(Datas.getString("Username"+" "+"Password"+" "+"Email"+" "+"Level"));
-        System.out.println(Datas.getString("Name"));
+        System.out.println(Datas.getString("Username"));
       }
 
 
     } catch (Exception ex) {
       ex.printStackTrace();
     }
-
-
 
 
   }
@@ -154,7 +154,7 @@ public class Students {
 
       // 1. get connection to database
 
-      Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/beersDB", dbUser, dbPass);
+      Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Students", dbUser, dbPass);
 
 
       // 2. create a statement
@@ -162,23 +162,33 @@ public class Students {
 
       // 3. execute sql query
 
-      String query = " insert into Beers (Name)"
+      String query = " insert into personal_info (Username)"
               + " values (?)";
       //myStatement.executeQuery("select * from Beers;");
       PreparedStatement preparedStmt = connection.prepareStatement(query);
       preparedStmt.setString(1, username);
-      preparedStmt.execute();
+      System.out.println(preparedStmt.execute());
 
     } catch (Exception ex) {
       ex.printStackTrace();
     }
 
 
-
-
   }
 
+  public void ShowbyUsername(String username) {
+      this.username = username;
+   /*/
+    this.password = password;
+    this.email = email;
+    this.level = level;
+    */
 
+    //String dbHost = "jdbc:mysql://3306/beersDB";
+    String dbUser = "root";
+    String dbPass = "ekmek";
+    System.out.println(username);
+// end of function
+  }
 
 }
-
